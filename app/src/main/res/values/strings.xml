@@ -11,4 +11,8 @@
     <string name="secondPassword">Repeat\npassword</string>
     <string name="registrationButton">Registration</string>
     <string name="startLogoDescription">This is start logo</string>
+    <string name="greetingButton">Greeting</string>
+    <string name="greetingMessage">Welcome</string>
+    <string name="exitButton">Exit</string>
+    <string name="userLogoDescription">This is user logo</string>
 </resources>
