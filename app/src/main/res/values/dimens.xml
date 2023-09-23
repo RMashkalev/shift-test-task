@@ -2,4 +2,6 @@
 <resources>
     <dimen name="text_font_size">20sp</dimen>
     <dimen name="edittext_font_size">30sp</dimen>
+    <dimen name="error_message_margin">16dp</dimen>
+    <dimen name="birthday_margin">8dp</dimen>
 </resources>

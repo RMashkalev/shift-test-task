@@ -5,7 +5,9 @@
     <string name="surname">Surname</string>
     <string name="surnameHint">Doe</string>
     <string name="birthday">Birthday</string>
-    <string name="birthdayHint">DD.MM.YYYY</string>
+    <string name="birthday_day">Day</string>
+    <string name="birthday_month">Month</string>
+    <string name="birthday_year">Year</string>
     <string name="firstPassword">Password</string>
     <string name="passwordHint">********</string>
     <string name="secondPassword">Repeat\npassword</string>
@@ -15,4 +17,14 @@
     <string name="greetingMessage">Welcome</string>
     <string name="exitButton">Exit</string>
     <string name="userLogoDescription">This is user logo</string>
+
+    <string name="negative_name">The length of the name must be\n 2 or more characters</string>
+    <string name="negative_surname">The length of the name must be\n 3 or more characters</string>
+    <string name="negative_birthday">Input correct birthday</string>
+    <string name="negative_first_password">The password must be:\n
+        Consist of at least 8 characters\n
+        Contain at least one letter and number\n
+        Contain at least one special character
+    </string>
+    <string name="negative_second_password">Passwords don\'t match</string>
 </resources>

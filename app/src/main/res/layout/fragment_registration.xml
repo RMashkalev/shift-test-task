@@ -16,6 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
+
             <ImageView
                 android:id="@+id/registrationLogo"
                 android:layout_width="150dp"
@@ -31,155 +33,225 @@
                 android:id="@+id/textName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 android:text="@string/name"
                 android:textSize="@dimen/text_font_size"
                 app:layout_constraintEnd_toStartOf="@+id/inputName"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/registrationLogo" />
+                app:layout_constraintTop_toTopOf="@id/inputName"
+                app:layout_constraintBottom_toBottomOf="@id/inputName"/>
 
             <EditText
                 android:id="@+id/inputName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/error_message_margin"
                 android:autofillHints="@string/name"
-                android:background="@drawable/edit_text_theme"
+                android:background="@drawable/neutral_edit_text_theme"
                 android:ems="7"
                 android:hint="@string/nameHint"
                 android:inputType="text"
                 android:text=""
                 android:textSize="@dimen/edittext_font_size"
-                app:layout_constraintBottom_toBottomOf="@+id/textName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/registrationLogo"
-                app:layout_constraintTop_toTopOf="@+id/textName" />
+                app:layout_constraintTop_toBottomOf="@+id/registrationLogo" />
+
+            <TextView
+                android:id="@+id/nameErrorMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="@+id/inputName"
+                app:layout_constraintStart_toStartOf="@+id/inputName"
+                app:layout_constraintTop_toBottomOf="@+id/inputName" />
 
             <TextView
                 android:id="@+id/textSurname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 android:text="@string/surname"
                 android:textSize="@dimen/text_font_size"
+                app:layout_constraintBottom_toBottomOf="@id/inputSurname"
                 app:layout_constraintEnd_toStartOf="@+id/inputSurname"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputName" />
+                app:layout_constraintTop_toTopOf="@+id/inputSurname" />
 
             <EditText
                 android:id="@+id/inputSurname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/surname"
-                android:background="@drawable/edit_text_theme"
+                android:background="@drawable/neutral_edit_text_theme"
                 android:ems="7"
                 android:hint="@string/surnameHint"
                 android:inputType="text"
                 android:text=""
                 android:textSize="@dimen/edittext_font_size"
-                app:layout_constraintBottom_toBottomOf="@+id/textSurname"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/surnameErrorMessage"
+                app:layout_constraintEnd_toEndOf="@+id/nameErrorMessage"
+                app:layout_constraintStart_toStartOf="@+id/nameErrorMessage"
+                app:layout_constraintTop_toBottomOf="@+id/nameErrorMessage" />
+
+            <TextView
+                android:id="@+id/surnameErrorMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="@+id/inputSurname"
+                app:layout_constraintStart_toStartOf="@+id/inputSurname"
+                app:layout_constraintTop_toBottomOf="@+id/inputSurname" />
+
+            <Spinner
+                android:id="@+id/day"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@id/month"
+                app:layout_constraintStart_toStartOf="@+id/inputSurname"
+                app:layout_constraintTop_toTopOf="@+id/month" />
+
+            <Spinner
+                android:id="@+id/month"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/error_message_margin"
+                app:layout_constraintEnd_toStartOf="@id/year"
+                app:layout_constraintStart_toEndOf="@+id/day"
+                app:layout_constraintTop_toBottomOf="@+id/surnameErrorMessage" />
+
+            <Spinner
+                android:id="@+id/year"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/inputSurname"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/inputName"
-                app:layout_constraintTop_toTopOf="@+id/textSurname" />
+                app:layout_constraintStart_toEndOf="@+id/month"
+                app:layout_constraintTop_toTopOf="@+id/month" />
+
+            <TextView
+                android:id="@+id/textDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/birthday_margin"
+                android:text="@string/birthday_day"
+                app:layout_constraintEnd_toEndOf="@+id/day"
+                app:layout_constraintStart_toStartOf="@+id/day"
+                app:layout_constraintTop_toBottomOf="@+id/day" />
+
+            <TextView
+                android:id="@+id/textMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/birthday_margin"
+                android:text="@string/birthday_month"
+                app:layout_constraintEnd_toEndOf="@+id/month"
+                app:layout_constraintStart_toStartOf="@+id/month"
+                app:layout_constraintTop_toBottomOf="@+id/month" />
+
+            <TextView
+                android:id="@+id/textYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/birthday_margin"
+                android:text="@string/birthday_year"
+                app:layout_constraintEnd_toEndOf="@+id/year"
+                app:layout_constraintStart_toStartOf="@+id/year"
+                app:layout_constraintTop_toBottomOf="@+id/year" />
 
             <TextView
                 android:id="@+id/textBirthday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 android:text="@string/birthday"
                 android:textSize="@dimen/text_font_size"
-                app:layout_constraintEnd_toStartOf="@+id/inputBirthday"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputSurname" />
-
-            <EditText
-                android:id="@+id/inputBirthday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:autofillHints="@string/birthday"
-                android:background="@drawable/edit_text_theme"
-                android:ems="7"
-                android:hint="@string/birthdayHint"
-                android:inputType="number"
-                android:text=""
-                android:textSize="@dimen/edittext_font_size"
-                app:layout_constraintBottom_toBottomOf="@+id/textBirthday"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/inputSurname"
-                app:layout_constraintTop_toTopOf="@+id/textBirthday" />
+                app:layout_constraintBottom_toBottomOf="@+id/day"
+                app:layout_constraintEnd_toEndOf="@+id/textSurname"
+                app:layout_constraintStart_toStartOf="@+id/textSurname"
+                app:layout_constraintTop_toTopOf="@+id/day" />
 
             <TextView
                 android:id="@+id/textFirstPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 android:text="@string/firstPassword"
                 android:textSize="@dimen/text_font_size"
                 app:layout_constraintEnd_toStartOf="@+id/inputFirstPassword"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputBirthday" />
+                app:layout_constraintTop_toTopOf="@+id/inputFirstPassword"
+                app:layout_constraintBottom_toBottomOf="@id/inputFirstPassword"/>
 
             <EditText
                 android:id="@+id/inputFirstPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/firstPassword"
-                android:background="@drawable/edit_text_theme"
+                android:background="@drawable/neutral_edit_text_theme"
                 android:ems="7"
                 android:hint="@string/passwordHint"
                 android:inputType="textPassword"
                 android:textSize="@dimen/edittext_font_size"
-                app:layout_constraintBottom_toBottomOf="@+id/textFirstPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/inputBirthday"
-                app:layout_constraintTop_toTopOf="@+id/textFirstPassword" />
+                android:layout_marginTop="@dimen/error_message_margin"
+                app:layout_constraintEnd_toEndOf="@+id/year"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="@+id/day"
+                app:layout_constraintTop_toBottomOf="@+id/textMonth" />
+
+            <TextView
+                android:id="@+id/firstPasswordErrorMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="@+id/inputFirstPassword"
+                app:layout_constraintStart_toStartOf="@+id/inputFirstPassword"
+                app:layout_constraintTop_toBottomOf="@+id/inputFirstPassword" />
 
             <TextView
                 android:id="@+id/textSecondPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 android:gravity="center"
                 android:text="@string/secondPassword"
                 android:textSize="@dimen/text_font_size"
                 app:layout_constraintEnd_toStartOf="@+id/inputSecondPassword"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputFirstPassword" />
+                app:layout_constraintTop_toTopOf="@+id/inputSecondPassword"
+                app:layout_constraintBottom_toBottomOf="@id/inputSecondPassword"/>
 
             <EditText
                 android:id="@+id/inputSecondPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/firstPassword"
-                android:background="@drawable/edit_text_theme"
+                android:background="@drawable/neutral_edit_text_theme"
                 android:ems="7"
                 android:hint="@string/passwordHint"
                 android:inputType="textPassword"
                 android:textSize="@dimen/edittext_font_size"
-                app:layout_constraintBottom_toBottomOf="@+id/textSecondPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/inputFirstPassword"
-                app:layout_constraintTop_toTopOf="@+id/textSecondPassword" />
+                app:layout_constraintEnd_toEndOf="@+id/firstPasswordErrorMessage"
+                app:layout_constraintStart_toStartOf="@+id/firstPasswordErrorMessage"
+                app:layout_constraintTop_toBottomOf="@+id/firstPasswordErrorMessage" />
+
+            <TextView
+                android:id="@+id/secondPasswordErrorMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="@+id/inputSecondPassword"
+                app:layout_constraintStart_toStartOf="@+id/inputSecondPassword"
+                app:layout_constraintTop_toBottomOf="@+id/inputSecondPassword" />
 
             <Button
                 android:id="@+id/registrationButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 android:text="@string/registrationButton"
+                android:layout_marginTop="@dimen/error_message_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputSecondPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/secondPasswordErrorMessage" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
