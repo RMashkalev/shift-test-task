@@ -14,6 +14,8 @@ import androidx.fragment.app.activityViewModels
 import com.example.shifttesttask.R.drawable.negative_edit_text_theme
 import com.example.shifttesttask.R.drawable.positive_edit_text_theme
 import com.example.shifttesttask.databinding.FragmentRegistrationBinding
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class Registration : Fragment() {
     private lateinit var registrationBinding: FragmentRegistrationBinding
@@ -37,7 +39,6 @@ class Registration : Fragment() {
         birthdaySelect()
         registrationButton()
     }
-
 
     private fun initPersonData() {
         personData.name.value = ""
@@ -133,7 +134,6 @@ class Registration : Fragment() {
                 fieldsCheck()
             }
         })
-
     }
 
     fun fieldsCheck() {
@@ -142,6 +142,7 @@ class Registration : Fragment() {
                 && personData.day.value != ""
                 && personData.month.value != ""
                 && personData.year.value != ""
+                && personData.birthdayCheck.value == true
                 && personData.password.value != ""
                 && personData.repeatPassword.value != "")
     }
@@ -176,6 +177,7 @@ class Registration : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                 registrationBinding.day.setBackgroundResource(positive_edit_text_theme)
                 personData.day.value = days[pos]
+                birthdayCheck()
                 fieldsCheck()
             }
 
@@ -188,6 +190,7 @@ class Registration : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                 registrationBinding.month.setBackgroundResource(positive_edit_text_theme)
                 personData.month.value = months[pos]
+                birthdayCheck()
                 fieldsCheck()
             }
 
@@ -200,20 +203,38 @@ class Registration : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                 registrationBinding.year.setBackgroundResource(positive_edit_text_theme)
                 personData.year.value = years[pos]
+                birthdayCheck()
                 fieldsCheck()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 registrationBinding.year.setBackgroundResource(negative_edit_text_theme)
             }
-
         })
-
-        birthdayCheck()
     }
 
     private fun birthdayCheck() {
-
+        if (personData.day.value == ""
+            || personData.month.value == ""
+            || personData.year.value == "") {
+            return
+        }
+        try {
+            val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+            formatter.isLenient = false
+            formatter.parse(personData.day.value.toString() + "-"
+                    + personData.month.value.toString() + "-"
+                    + personData.year.value.toString())
+            registrationBinding.day.setBackgroundResource(positive_edit_text_theme)
+            registrationBinding.month.setBackgroundResource(positive_edit_text_theme)
+            registrationBinding.year.setBackgroundResource(positive_edit_text_theme)
+            personData.birthdayCheck.value = true
+        } catch (e: Exception) {
+            registrationBinding.day.setBackgroundResource(negative_edit_text_theme)
+            registrationBinding.month.setBackgroundResource(negative_edit_text_theme)
+            registrationBinding.year.setBackgroundResource(negative_edit_text_theme)
+            personData.birthdayCheck.value = false
+        }
     }
 
     private fun registrationButton() {

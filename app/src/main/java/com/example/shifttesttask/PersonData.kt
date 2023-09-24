@@ -9,6 +9,7 @@ interface PersonRegistrationData {
     val day: MutableLiveData<String>
     val month: MutableLiveData<String>
     val year: MutableLiveData<String>
+    val birthdayCheck: MutableLiveData<Boolean>
     val password: MutableLiveData<String>
     val repeatPassword: MutableLiveData<String>
     val allChecksPassed: MutableLiveData<Boolean>
@@ -29,6 +30,9 @@ class PersonData : ViewModel(), PersonRegistrationData {
     }
     override val year: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
+    }
+    override val birthdayCheck: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
     }
     override val password: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
