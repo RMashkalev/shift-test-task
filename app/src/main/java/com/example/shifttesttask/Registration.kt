@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.example.shifttesttask.R.drawable.negative_edit_text_theme
@@ -30,26 +32,24 @@ class Registration : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        fieldsCheck()
-
-        registrationBinding.registrationButton.setOnClickListener {
-            if (personData.allChecksPassed.value == true) {
-                activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.mainFrame, MainScreen.newInstance())
-                    ?.commit()
-            } else {
-                Toast.makeText(
-                    activity,
-                    "Enter the correct registration data",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-        }
+        initPersonData()
+        inputFields()
+        birthdaySelect()
+        registrationButton()
     }
 
-    private fun fieldsCheck() {
+
+    private fun initPersonData() {
+        personData.name.value = ""
+        personData.surname.value = ""
+        personData.day.value = ""
+        personData.month.value = ""
+        personData.year.value = ""
+        personData.password.value = ""
+        personData.repeatPassword.value = ""
+    }
+
+    private fun inputFields() {
         registrationBinding.inputName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -66,6 +66,7 @@ class Registration : Fragment() {
                     registrationBinding.nameErrorMessage.text =
                         resources.getString(R.string.negative_name)
                 }
+                fieldsCheck()
             }
         })
 
@@ -80,11 +81,12 @@ class Registration : Fragment() {
                     registrationBinding.inputSurname.setBackgroundResource(positive_edit_text_theme)
                     registrationBinding.surnameErrorMessage.text = ""
                 } else {
-                    personData.name.value = ""
+                    personData.surname.value = ""
                     registrationBinding.inputSurname.setBackgroundResource(negative_edit_text_theme)
                     registrationBinding.surnameErrorMessage.text =
                         resources.getString(R.string.negative_surname)
                 }
+                fieldsCheck()
             }
         })
 
@@ -106,6 +108,7 @@ class Registration : Fragment() {
                     registrationBinding.firstPasswordErrorMessage.text =
                         resources.getString(R.string.negative_first_password)
                 }
+                fieldsCheck()
             }
         })
 
@@ -127,8 +130,106 @@ class Registration : Fragment() {
                     registrationBinding.secondPasswordErrorMessage.text =
                         resources.getString(R.string.negative_second_password)
                 }
+                fieldsCheck()
             }
         })
+
+    }
+
+    fun fieldsCheck() {
+        personData.allChecksPassed.value = (personData.name.value != ""
+                && personData.surname.value != ""
+                && personData.day.value != ""
+                && personData.month.value != ""
+                && personData.year.value != ""
+                && personData.password.value != ""
+                && personData.repeatPassword.value != "")
+    }
+
+    private fun birthdaySelect() {
+        val days = mutableListOf<String>()
+        val months = mutableListOf<String>()
+        val years = mutableListOf<String>()
+        for (i in 1..31) days.add(i.toString())
+        for (i in 1..12) months.add(i.toString())
+        for (i in 1950..2023) years.add(i.toString())
+        val daysAdapter = activity?.let {
+            ArrayAdapter<String>(it,
+                androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item,
+                days)
+        }
+        val monthsAdapter = activity?.let {
+            ArrayAdapter<String>(it,
+                androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item,
+                months)
+        }
+        val yearsAdapter = activity?.let {
+            ArrayAdapter<String>(it,
+                androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item,
+                years)
+        }
+        registrationBinding.day.adapter = daysAdapter
+        registrationBinding.month.adapter = monthsAdapter
+        registrationBinding.year.adapter = yearsAdapter
+
+        registrationBinding.day.onItemSelectedListener = (object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+                registrationBinding.day.setBackgroundResource(positive_edit_text_theme)
+                personData.day.value = days[pos]
+                fieldsCheck()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                registrationBinding.day.setBackgroundResource(negative_edit_text_theme)
+            }
+
+        })
+        registrationBinding.month.onItemSelectedListener = (object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+                registrationBinding.month.setBackgroundResource(positive_edit_text_theme)
+                personData.month.value = months[pos]
+                fieldsCheck()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                registrationBinding.month.setBackgroundResource(negative_edit_text_theme)
+            }
+
+        })
+        registrationBinding.year.onItemSelectedListener = (object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+                registrationBinding.year.setBackgroundResource(positive_edit_text_theme)
+                personData.year.value = years[pos]
+                fieldsCheck()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                registrationBinding.year.setBackgroundResource(negative_edit_text_theme)
+            }
+
+        })
+
+        birthdayCheck()
+    }
+
+    private fun birthdayCheck() {
+
+    }
+
+    private fun registrationButton() {
+        registrationBinding.registrationButton.setOnClickListener {
+            if (personData.allChecksPassed.value == true) {
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.mainFrame, MainScreen.newInstance())
+                    ?.commit()
+            } else {
+                Toast.makeText(
+                    activity,
+                    "Enter the correct registration data",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     companion object {
