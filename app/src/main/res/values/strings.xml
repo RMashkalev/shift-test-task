@@ -24,7 +24,8 @@
     <string name="negative_first_password">The password must be:\n
         Consist of at least 8 characters\n
         Contain at least one letter and number\n
-        Contain at least one special character
+        Contain at least one special character\n
+        Not contain spaces
     </string>
     <string name="negative_second_password">Passwords don\'t match</string>
 </resources>

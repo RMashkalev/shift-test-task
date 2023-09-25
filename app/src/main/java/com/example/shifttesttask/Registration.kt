@@ -97,7 +97,7 @@ class Registration : Fragment() {
             override fun onTextChanged(result: CharSequence?, start: Int, before: Int, count: Int) {
             }
             override fun afterTextChanged(result: Editable?) {
-                if (result.toString().length in 8..100) {
+                if (passwordCheck(result.toString())) {
                     personData.password.value = result.toString()
                     registrationBinding.inputFirstPassword
                         .setBackgroundResource(positive_edit_text_theme)
@@ -147,13 +147,22 @@ class Registration : Fragment() {
                 && personData.repeatPassword.value != "")
     }
 
+    fun passwordCheck(password: String): Boolean {
+        val symbols = "!@#$%^&*()"
+        if (password.firstOrNull { it.isDigit() } == null) return false
+        if (password.firstOrNull { it.isLetter() } == null) return false
+        if (password.firstOrNull { it.isWhitespace()} != null) return false
+        if (password.firstOrNull { symbols.contains(it)} == null) return false
+        return true
+    }
+
     private fun birthdaySelect() {
         val days = mutableListOf<String>()
         val months = mutableListOf<String>()
         val years = mutableListOf<String>()
         for (i in 1..31) days.add(i.toString())
         for (i in 1..12) months.add(i.toString())
-        for (i in 1950..2023) years.add(i.toString())
+        for (i in 1930..2023) years.add(i.toString())
         val daysAdapter = activity?.let {
             ArrayAdapter<String>(it,
                 androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item,
