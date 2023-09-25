@@ -183,8 +183,12 @@ class Registration : Fragment() {
     }
 
     fun passwordCheck(password: String): Boolean {
+        val symbols = "!@#$%^&*()\\|/:[]{}\'\"?.,"
         if (password.length < 8 || password.length > 100) return false
-        if (password.contains(Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\\\S+\$).{4,}\$"))) return false
+        if (password.firstOrNull { it.isDigit() } == null) return false
+        if (password.firstOrNull { it.isLetter() } == null) return false
+        if (password.firstOrNull { it.isWhitespace()} != null) return false
+        if (password.firstOrNull { symbols.contains(it)} == null) return false
         return true
     }
 
