@@ -18,14 +18,27 @@
     <string name="exitButton">Exit</string>
     <string name="userLogoDescription">This is user logo</string>
 
-    <string name="negative_name">The length of the name must be\n 2 or more characters</string>
-    <string name="negative_surname">The length of the name must be\n 3 or more characters</string>
+    <string name="negative_name">The length of the name must be\n
+        2 or more characters\n
+        and consist only of letters</string>
     <string name="negative_birthday">Input correct birthday</string>
     <string name="negative_first_password">The password must be:\n
         Consist of at least 8 characters\n
         Contain at least one letter and number\n
-        Contain at least one special character\n
+        Contain at least one special character [!@#$%^&amp;*()\|/:]\n
         Not contain spaces
     </string>
     <string name="negative_second_password">Passwords don\'t match</string>
+
+    <string name="shared_preferences">app_preferences</string>
+    <string name="user_name">user_name</string>
+    <string name="user_surname">user_surname</string>
+    <string name="user_day">user_day</string>
+    <string name="user_month">user_month</string>
+    <string name="user_year">user_year</string>
+    <string name="user_password">user_password</string>
+    <string name="user_repeat_password">user_repeat_password</string>
+    <string name="user_all_checks">user_all_checks</string>
+    <string name="user_birthday_check">user_birthday_check</string>
+
 </resources>
